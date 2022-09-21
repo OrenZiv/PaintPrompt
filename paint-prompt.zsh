@@ -9,8 +9,8 @@ paint_prompt() {
 
     PROMPT='%{$fg[green]%}%n@%m %{$fg[cyan]%}%~' # Username and current folder.
     PROMPT+='$([[ $(k8s_context) =~ ${PROD} ]] && echo %{$fg_bold[red]%} || echo %{$fg[yellow]%})$(k8s_context) ' # Kubernetes context. red if prod, else yellow.
-    PROMPT+='%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%}' # Current Git branch.
-    PROMPT+='${newline} -> '
+    PROMPT+='%{$fg_bold[blue]%}$(git_prompt_info)${newline}' # Current Git branch.
+    PROMPT+='%(?.%{$fg_bold[cyan]%}.%{$fg_bold[red]%}) -» %{$reset_color%}' # cyan or red based on if the previous command exited properly.
 
     ZSH_THEME_GIT_PROMPT_PREFIX="("
     ZSH_THEME_GIT_PROMPT_SUFFIX=") "
