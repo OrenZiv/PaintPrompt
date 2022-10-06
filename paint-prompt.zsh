@@ -7,7 +7,8 @@ paint_prompt() {
     PROD=$'MY_K8S_PROD_CONTEXT' # change to your production context
     newline=$'\n'
 
-    PROMPT='%{$fg[green]%}%n@%m %{$fg[cyan]%}%~' # username and current folder
+    PROMPT='$fg[magenta]% ($(date +"%H:%M:%S")) ' # current time
+    PROMPT+='%{$fg[green]%}%n@%m %{$fg[cyan]%}%~' # username and current folder
     PROMPT+='$([[ $(k8s_context) =~ ${PROD} ]] && echo %{$fg_bold[red]%} || echo %{$fg[yellow]%})$(k8s_context) ' # kubernetes context. red if prod, else yellow
     PROMPT+='%{$fg_bold[blue]%}$(git_prompt_info)${newline}' # current Git branch
     PROMPT+='%(?.%{$fg_bold[cyan]%}.%{$fg_bold[red]%}) -» %{$reset_color%}' # cyan or red based on if the previous command exited properly
