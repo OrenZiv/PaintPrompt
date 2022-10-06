@@ -28,6 +28,31 @@ k8s_context() {
     fi
 }
 
+# perform 'ls' after 'rm' if successful.
+rmls() {
+  rm "$*"
+  RESULT=$?
+  if [ "$RESULT" -eq 0 ]; then
+    ls -la
+  fi
+}
+
+# 'cd ..' X amount of times, for example 'up 4' == cd ../../../..
+up()
+{
+    dir=""
+    if [[ $1 =~ ^[0-9]+$ ]]; then
+        x=0
+        while [ $x -lt ${1:-1} ]; do
+            dir=${dir}../
+            x=$(($x+1))
+        done
+    else
+         dir=..
+    fi
+    cd "$dir";
+}
+
 set_shortcuts() {
    alias ..='cd ..'
    alias ...='cd ../..'
@@ -46,20 +71,5 @@ set_shortcuts() {
    alias ftree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # file tree of current directory
    alias fusage="find . -maxdepth 1 -type d -mindepth 1 -exec du -hs {} \;" # space usage of dirs inside current directory
    alias hg='history | grep '
-}
-
-# 'cd ..' X amount of times, for example 'up 4' == cd ../../../..
-up()
-{
-    dir=""
-    if [[ $1 =~ ^[0-9]+$ ]]; then
-        x=0
-        while [ $x -lt ${1:-1} ]; do
-            dir=${dir}../
-            x=$(($x+1))
-        done
-    else
-         dir=..
-    fi
-    cd "$dir";
+   alias rm='rmls'
 }
