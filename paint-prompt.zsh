@@ -38,14 +38,13 @@ rmls() {
 }
 
 # 'cd ..' X amount of times, for example 'up 4' == cd ../../../..
-up()
-{
+up() {
     dir=""
     if [[ $1 =~ ^[0-9]+$ ]]; then
-        x=0
-        while [ $x -lt ${1:-1} ]; do
+        n=0
+        while [ $n -lt ${1:-1} ]; do
             dir=${dir}../
-            x=$(($x+1))
+            n=$(($n+1))
         done
     else
          dir=..
@@ -54,18 +53,6 @@ up()
 }
 
 set_shortcuts() {
-   alias ..='cd ..'
-   alias ...='cd ../..'
-   alias ....='cd ../../..'
-   alias .....='cd ../../../..'
-   alias ......='cd ../../../../..'
-   alias .......='cd ../../../../../..'
-   alias ........='cd ../../../../../../..'
-   alias .........='cd ../../../../../../../..'
-   alias ..........='cd ../../../../../../../../..'
-   alias ...........='cd ../../../../../../../../../..'
-   alias ............='cd ../../../../../../../../../../..'
-
    alias rr='cd $(git rev-parse --show-toplevel)' # cd to repo's root
    alias k='kubectl'
    alias ftree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # file tree of current directory
