@@ -8,3 +8,5 @@ Put `paint-prompt.zsh` in your home folder and add this bit of code to your `~/.
 source ~/paint-prompt.zsh
 init_prompt
 ```
+
+Requires [OhMyZsh](https://github.com/ohmyzsh/ohmyzsh) to work.
