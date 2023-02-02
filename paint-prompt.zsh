@@ -48,5 +48,5 @@ set_shortcuts() {
    alias k='kubectl'
    alias ftree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # file tree of current directory
    alias fusage="find . -maxdepth 1 -type d -mindepth 1 -exec du -hs {} \;" # space usage of dirs inside current directory
-   alias hg='history | grep '
+   alias hg='history -f | grep '
 }
